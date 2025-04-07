@@ -1,1 +1,50 @@
+class Node:
+    def __init__(self, item, next=None):
+        self.item = item
+        self.next = next
 
+class MyQueue(object):
+
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def push(self, x):
+        """
+        :type x: int
+        :rtype: None
+        """
+        if self.tail is None:
+            new_node = Node(x)
+            self.tail = new_node
+            self.head = new_node
+        else:
+            new_node = Node(x)
+            self.tail.next = new_node
+            self.tail = new_node
+
+    def pop(self):
+        """
+        :rtype: int
+        """
+        if self.empty():
+            raise ValueError('Queue is empty')
+        item = self.head.item
+        self.head = self.head.next
+        if self.head is None:
+            self.tail = None
+        return item
+
+    def peek(self):
+        """
+        :rtype: int
+        """
+        if self.empty():
+            raise ValueError('Queue is empty')
+        return self.head.item
+
+    def empty(self):
+        """
+        :rtype: bool
+        """
+        return self.head is None
